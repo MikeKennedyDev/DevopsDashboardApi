@@ -1,0 +1,27 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildConfiguration: 'Release'
+
+steps:
+- script: dotnet restore $(solution)
+  displayName: 'Dotnet Restore'
+
+- script: dotnet build $(solution) --configuration $(buildConfiguration)
+  displayName: 'Dotnet Build'
+
+- script: dotnet test $(solution) --configuration $(buildConfiguration) --no-build
+  displayName: 'Dotnet Test'
+
+- script: dotnet publish $(solution) --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)
+  displayName: 'Dotnet Publish'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'webapp'
