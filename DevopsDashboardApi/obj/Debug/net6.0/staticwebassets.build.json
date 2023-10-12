@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "RGiJb0IgaeP6lEsPYnRCtf5hZeJt4CrxQg46TQzTnPI=",
+  "Source": "DevopsDashboardApi",
+  "BasePath": "_content/DevopsDashboardApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
