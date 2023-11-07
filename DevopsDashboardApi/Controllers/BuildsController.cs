@@ -7,5 +7,38 @@ namespace DevopsDashboardApi.Controllers
     [ApiController]
     public class BuildsController : ControllerBase
     {
+        #region Endpoints
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteBuild(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        public IActionResult GetBuildById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetRecentBuilds()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public IActionResult TriggerBuild()
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateBuild(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion Endpoints
     }
 }
