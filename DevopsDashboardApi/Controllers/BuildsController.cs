@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DevopsDashboardApi.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevopsDashboardApi.Controllers
@@ -7,6 +8,17 @@ namespace DevopsDashboardApi.Controllers
     [ApiController]
     public class BuildsController : ControllerBase
     {
+        #region Fields
+
+        private static readonly List<Build> mockBuilds = new List<Build>
+        {
+            new Build { Id = 1, ProjectName = "DevopsDashboardApi", Branch = "master", Status = "Succeeded", Duration = "00:00:10", StartTime = DateTime.Now },
+            new Build { Id = 2, ProjectName = "DevopsDashboardApi", Branch = "master", Status = "Failed", Duration = "00:00:15", StartTime = DateTime.Now },
+            new Build { Id = 3, ProjectName = "DevopsDashboardApi", Branch = "master", Status = "Succeeded", Duration = "00:00:05", StartTime = DateTime.Now },
+        };
+
+        #endregion Fields
+
         #region Endpoints
 
         [HttpDelete("{id}")]
@@ -18,13 +30,18 @@ namespace DevopsDashboardApi.Controllers
         [HttpGet]
         public IActionResult GetBuildById(int id)
         {
-            throw new NotImplementedException();
+            var build = mockBuilds.Find(o => o.Id == id);
+            if (build == null)
+            {
+                return NotFound();
+            }
+            return Ok(build);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetRecentBuilds()
         {
-            throw new NotImplementedException();
+            return Ok(mockBuilds);
         }
 
         [HttpPost]
