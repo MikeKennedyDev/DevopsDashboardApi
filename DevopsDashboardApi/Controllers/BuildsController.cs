@@ -18,8 +18,7 @@ namespace DevopsDashboardApi.Controllers
         [HttpGet]
         public IActionResult GetBuildById(int id)
         {
-            return Ok();
-            //throw new NotImplementedException();
+            throw new NotImplementedException();
         }
 
         [HttpGet("{id}")]
