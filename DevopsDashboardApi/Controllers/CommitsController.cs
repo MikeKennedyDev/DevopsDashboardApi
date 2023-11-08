@@ -36,11 +36,12 @@ namespace DevopsDashboardApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteCommit(int id)
         {
-            if (_commits.Find(o => o.Id == id) == null)
+            var commit = _commits.Find(o => o.Id == id);
+            if (commit == null)
             {
                 return NotFound();
             }
-            _commits.Remove(_commits.Find(o => o.Id == id));
+            _commits.Remove(commit);
 
             return Ok();
         }
@@ -48,19 +49,34 @@ namespace DevopsDashboardApi.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCommitById(int id)
         {
-            throw new NotImplementedException();
+            var commit = _commits.Find(o => o.Id == id);
+            if (commit == null)
+            {
+                return NotFound();
+            }
+            return Ok(commit);
         }
 
         [HttpGet]
         public IActionResult GetRecentCommits()
         {
-            throw new NotImplementedException();
+            return Ok(_commits);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCommit(int id)
+        public IActionResult UpdateCommit(int id, [FromBody] CommitDTO commitDTO)
         {
-            throw new NotImplementedException();
+            if (commitDTO == null || commitDTO.Id != id)
+            {
+                return BadRequest();
+            }
+            var commit = _commits.Find(o => o.Id == id);
+            if (commit == null)
+            {
+                return NotFound();
+            }
+            commit = commitDTO;
+            return Ok();
         }
 
         #endregion Endpoints
